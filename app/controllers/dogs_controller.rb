@@ -1,5 +1,5 @@
 class DogsController < ApplicationController
-rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
+#rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
     wrap_parameters format: []
     
     def index
@@ -17,13 +17,13 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_resp
     end    
 
     def create
-        dog = Dog.create!(dog_params)
+        dog = Dog.create(dog_params)
         render json: dog, status: :created
     end
 
     def update
         dog = Dog.find_by(id: params[:id])
-        dog.update!(dog_params)
+        dog.update(dog_params)
         render json: dog, status: :accepted
         end
         
@@ -39,7 +39,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_resp
     params.permit(:breed, :image, :likes, :price)
     end
         
-    def render_unprocessable_entity_response(invalid)
-        render json: { errors: invalid.record.errors }, status: :unprocessable_entity
-    end
+   # def render_unprocessable_entity_response(invalid)
+    #    render json: { errors: invalid.record.errors }, status: :unprocessable_entity
+   # end
 end

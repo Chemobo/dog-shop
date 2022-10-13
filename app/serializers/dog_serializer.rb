@@ -1,3 +1,4 @@
 class DogSerializer < ActiveModel::Serializer
-  attributes :id, :breed, :image, :likes, :price
+  attributes :breed, :image, :likes, :price
+  belongs_to :user
 end
